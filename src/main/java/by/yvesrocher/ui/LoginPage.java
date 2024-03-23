@@ -25,6 +25,18 @@ public class LoginPage {
     public static String incorrectEmailError = "Email* павінен быць сапраўдным";
     public static String longEmailError = "Email* павінен быць не больш за 255 сімвалаў";
 
+    public By getEmailField() {
+        return emailField;
+    }
+
+    public By getPasswordField() {
+        return passwordField;
+    }
+
+    public void placeCursorInField(By cssSelector) {
+        driver.findElement(cssSelector).click();
+    }
+
     public void inputEmail(String email) {
         driver.findElement(emailField).sendKeys(email);
     }
