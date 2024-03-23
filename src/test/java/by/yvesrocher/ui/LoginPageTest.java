@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
+
 public class LoginPageTest extends BaseTest {
     @Test
     @DisplayName("Test Non-Existing Credentials Error")
@@ -18,7 +20,7 @@ public class LoginPageTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         Thread.sleep(2000);
         Utils utils=new Utils();
-        loginPage.completeAuthorizationForm("login@mail.com", utils.generateString(7));
+        loginPage.completeAuthorizationForm(utils.generateEmail(3, "@mail.com"), utils.generateString(7));
 
         Assertions.assertEquals(LoginPage.authorizationError, loginPage.getError());
     }
@@ -36,7 +38,7 @@ public class LoginPageTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         Thread.sleep(2000);
         Utils utils=new Utils();
-        loginPage.completeAuthorizationForm("login@mail.com",utils.generateString(31));
+        loginPage.completeAuthorizationForm(utils.generateEmail(3, "@mail.com"),utils.generateString(31));
 
         Assertions.assertEquals(LoginPage.longPasswordError, loginPage.getPasswordValidationError());
     }
@@ -54,7 +56,7 @@ public class LoginPageTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         Thread.sleep(2000);
         Utils utils=new Utils();
-        loginPage.completeAuthorizationForm("login@mail.com",utils.generateString(3));
+        loginPage.completeAuthorizationForm(utils.generateEmail(3, "@mail.com"), utils.generateString(3));
 
         Assertions.assertEquals(LoginPage.shortPasswordError, loginPage.getPasswordValidationError());
     }
@@ -70,11 +72,9 @@ public class LoginPageTest extends BaseTest {
         homePage.openLoginPage();
 
         LoginPage loginPage = new LoginPage();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         Utils utils=new Utils();
-        loginPage.completeAuthorizationForm(
-                "11178800000000000000000000000000000000000000000000000000000000000000000000000000088888888881111111117777777777777777777777777777777777777111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111455555555555555555555555555555555555555555555555555555555551111111111111111111111111111111111111111111111114444444444444444444444444444411111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111login@mail.com",
-                utils.generateString(7));
+        loginPage.completeAuthorizationForm(utils.generateEmail(247, "@mail.com").toLowerCase(Locale.ROOT),utils.generateString(7));
 
         Assertions.assertEquals(LoginPage.longEmailError, loginPage.getEmailValidationError());
     }
@@ -92,7 +92,7 @@ public class LoginPageTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         Thread.sleep(2000);
         Utils utils=new Utils();
-        loginPage.completeAuthorizationForm("login@mail.com11111111111111111111111111111111", utils.generateString(7));
+        loginPage.completeAuthorizationForm(utils.generateEmail(3, "@mail.com"), utils.generateString(7));
 
         Assertions.assertEquals(LoginPage.incorrectEmailError, loginPage.getEmailValidationError());
     }
@@ -128,7 +128,8 @@ public class LoginPageTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         Thread.sleep(2000);
         loginPage.placeCursorInField(loginPage.getPasswordField());
-        loginPage.inputEmail("qwerty@mail.com");
+        Utils utils=new Utils();
+        loginPage.inputEmail(utils.generateEmail(3, "@mail.com"));
         Assertions.assertEquals(LoginPage.emptyFieldError, loginPage.getPasswordValidationError());
     }
 }

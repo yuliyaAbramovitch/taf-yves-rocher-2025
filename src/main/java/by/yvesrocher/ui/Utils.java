@@ -24,4 +24,16 @@ public class Utils {
     public String generateString(int length) {
         return RandomStringUtils.randomAlphabetic(length);
     }
+
+    public String generateEmail(int length, String postfix) {
+        return RandomStringUtils.randomAlphabetic(length) + postfix;
+    }
+
+    public String generateEmail(String prefix, int length, String postfix) {
+        return prefix + RandomStringUtils.randomAlphabetic(length) + postfix;
+    }
+
+    public String generateEmail(String prefix, int length) {
+        return prefix + RandomStringUtils.randomAlphabetic(length);
+    }
 }
