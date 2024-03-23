@@ -6,14 +6,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 
 public class BaseTest {
-   WebDriver driver;
-   @BeforeEach
-    public void warmUp(){
-       Driver.getDriver();
-       driver.get("https://www.y-r.by/");
-   }
-   @AfterEach
-    public void tearDown(){
-       Driver.quitDriver();
-   }
+    WebDriver driver;
+
+    @BeforeEach
+    public void warmUp() {
+        driver = Driver.getDriver();
+        driver.get("https://www.y-r.by/");
+    }
+
+    @AfterEach
+    public void tearDown() {
+        Driver.quitDriver();
+    }
 }

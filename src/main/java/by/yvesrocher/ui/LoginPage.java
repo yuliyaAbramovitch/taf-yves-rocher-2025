@@ -34,29 +34,32 @@ public class LoginPage {
     }
 
     public void placeCursorInField(By cssSelector) {
+        Utils.setWaiterByVisibility(driver, 3, 300, cssSelector);
         driver.findElement(cssSelector).click();
     }
 
     public void inputEmail(String email) {
+        Utils.setWaiterByVisibility(driver, 3, 300, emailField);
         driver.findElement(emailField).sendKeys(email);
     }
 
     public void inputPassword(String password) {
+        Utils.setWaiterByVisibility(driver, 3, 300, passwordField);
         driver.findElement(passwordField).sendKeys(password);
     }
 
     public void submitForm() {
+        Utils.setWaiterByVisibility(driver, 3, 300, submit);
         driver.findElement(submit).click();
     }
 
-    public void completeAuthorizationForm(String email, String password) throws InterruptedException {
+    public void completeAuthorizationForm(String email, String password) {
         inputEmail(email);
         inputPassword(password);
         Utils utils = new Utils();
         utils.scrollingWheel(delimiter);
-        Thread.sleep(1500);
         submitForm();
-        Thread.sleep(1000);
+        Utils.setWaiterByVisibility(driver, 3, 300, errorMessage);
     }
 
     public String getEmailValidationError() {
