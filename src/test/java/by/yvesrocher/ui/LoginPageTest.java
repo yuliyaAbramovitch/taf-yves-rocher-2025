@@ -17,7 +17,8 @@ public class LoginPageTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage();
         Thread.sleep(2000);
-        loginPage.completeAuthorizationForm("login@mail.com", "password4890");
+        Utils utils=new Utils();
+        loginPage.completeAuthorizationForm("login@mail.com", utils.generateString(7));
 
         Assertions.assertEquals(LoginPage.authorizationError, loginPage.getError());
     }
@@ -34,10 +35,8 @@ public class LoginPageTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage();
         Thread.sleep(2000);
-        loginPage.completeAuthorizationForm(
-                "login@mail.com",
-                "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
-        );
+        Utils utils=new Utils();
+        loginPage.completeAuthorizationForm("login@mail.com",utils.generateString(31));
 
         Assertions.assertEquals(LoginPage.longPasswordError, loginPage.getPasswordValidationError());
     }
@@ -54,7 +53,8 @@ public class LoginPageTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage();
         Thread.sleep(2000);
-        loginPage.completeAuthorizationForm("login@mail.com","111");
+        Utils utils=new Utils();
+        loginPage.completeAuthorizationForm("login@mail.com",utils.generateString(3));
 
         Assertions.assertEquals(LoginPage.shortPasswordError, loginPage.getPasswordValidationError());
     }
@@ -71,9 +71,10 @@ public class LoginPageTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage();
         Thread.sleep(2000);
+        Utils utils=new Utils();
         loginPage.completeAuthorizationForm(
                 "11178800000000000000000000000000000000000000000000000000000000000000000000000000088888888881111111117777777777777777777777777777777777777111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111455555555555555555555555555555555555555555555555555555555551111111111111111111111111111111111111111111111114444444444444444444444444444411111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111login@mail.com",
-                "112234111");
+                utils.generateString(7));
 
         Assertions.assertEquals(LoginPage.longEmailError, loginPage.getEmailValidationError());
     }
@@ -90,8 +91,8 @@ public class LoginPageTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage();
         Thread.sleep(2000);
-        loginPage.completeAuthorizationForm(
-                "login@mail.com11111111111111111111111111111111", "112234111");
+        Utils utils=new Utils();
+        loginPage.completeAuthorizationForm("login@mail.com11111111111111111111111111111111", utils.generateString(7));
 
         Assertions.assertEquals(LoginPage.incorrectEmailError, loginPage.getEmailValidationError());
     }
@@ -109,7 +110,8 @@ public class LoginPageTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         Thread.sleep(2000);
         loginPage.placeCursorInField(loginPage.getEmailField());
-        loginPage.inputPassword("12345678");
+        Utils utils=new Utils();
+        loginPage.inputPassword(utils.generateString(7));
         Assertions.assertEquals(LoginPage.emptyFieldError, loginPage.getEmailValidationError());
     }
     @Test
