@@ -21,15 +21,17 @@ public class HomePage {
     private By currentLanguage = By.cssSelector(".langauge-buttons .langauge-button.active");
 
     public void openLoginPage() {
+        Utils.setWaiterByVisibility(driver, 5, 300, login);
         driver.findElement(login).click();
     }
 
     public void leaveCurrentLanguageForUse() {
-
+        Utils.setWaiterByVisibility(driver, 10, 300, continueWithCurrentLanguage);
         driver.findElement(continueWithCurrentLanguage).click();
     }
 
     public void acceptCookie() {
+        Utils.setWaiterByVisibility(driver, 5, 300, acceptCookie);
         driver.findElement(acceptCookie).click();
     }
 

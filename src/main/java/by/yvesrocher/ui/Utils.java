@@ -6,12 +6,23 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+
+import java.time.Duration;
 
 public class Utils {
     WebDriver driver;
 
     public Utils() {
         this.driver = Driver.getDriver();
+    }
+    public static void setWaiterByVisibility(WebDriver driver, int timeoutSeconds, int pollingMillis, By cssLocator){
+        Wait<WebDriver> wait = new FluentWait<>(driver).
+                withTimeout(Duration.ofSeconds(timeoutSeconds)).
+                pollingEvery(Duration.ofMillis(pollingMillis));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cssLocator));
     }
 
     public void scrollingWheel(By cssSelector) {
@@ -21,19 +32,33 @@ public class Utils {
                 .perform();
     }
 
+    private int calculateSymbols(String appendix, int lengthLimit) {
+        int length = 0;
+        if (appendix.length() < lengthLimit) {
+            length = lengthLimit - appendix.length();
+        } else {
+            length = 0;
+        }
+        return length;
+    }
+
     public String generateString(int length) {
         return RandomStringUtils.randomAlphabetic(length);
     }
 
-    public String generateEmail(int length, String postfix) {
-        return RandomStringUtils.randomAlphabetic(length) + postfix;
+    public String generateString(String appendix, int lengthLimit) {
+        return generateString(calculateSymbols(appendix,lengthLimit));
     }
 
-    public String generateEmail(String prefix, int length, String postfix) {
-        return prefix + RandomStringUtils.randomAlphabetic(length) + postfix;
+    public String generateEmail(int lengthLimit, String postfix) {
+        return generateString(calculateSymbols(postfix,lengthLimit)) + postfix;
     }
 
-    public String generateEmail(String prefix, int length) {
-        return prefix + RandomStringUtils.randomAlphabetic(length);
+//    public String generateEmail(String prefix, int length, String postfix) {
+//        return prefix + RandomStringUtils.randomAlphabetic(length) + postfix;
+//    }
+
+    public String generateEmail(String prefix, int lengthLimit) {
+        return prefix + generateString(prefix, lengthLimit);
     }
 }
