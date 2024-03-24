@@ -31,7 +31,7 @@ public class LoginPageTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         Utils utils = new Utils();
         loginPage.inputPassword(utils.generateString(Constants.PASSWORD_MAX_LENGTH + 1));
-        loginPage.placeCursorInField(loginPage.getEmailField());
+        utils.placeCursorInField(loginPage.getEmailField());
         Assertions.assertEquals(LoginPage.longPasswordError, loginPage.getPasswordValidationError());
     }
 
@@ -45,7 +45,8 @@ public class LoginPageTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage();
         Utils utils = new Utils();
-        loginPage.completeAuthorizationForm(utils.generateEmail(20, "@mail.com"), utils.generateString(3));
+        loginPage.inputPassword(utils.generateString(3));
+        utils.placeCursorInField(loginPage.getEmailField());
 
         Assertions.assertEquals(LoginPage.shortPasswordError, loginPage.getPasswordValidationError());
     }
@@ -60,8 +61,8 @@ public class LoginPageTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage();
         Utils utils = new Utils();
-        loginPage.inputEmail(utils.generateEmail(Constants.EMAIL_MAX_LENGTH, "@mail.com"));
-        loginPage.getPasswordField();
+        loginPage.inputEmail(utils.generateEmail(Constants.EMAIL_MAX_LENGTH+1, "@mail.com").toLowerCase());
+        utils.placeCursorInField(loginPage.getPasswordField());
 
         Assertions.assertEquals(LoginPage.longEmailError, loginPage.getEmailValidationError());
     }
@@ -77,7 +78,7 @@ public class LoginPageTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         Utils utils = new Utils();
         loginPage.inputEmail(utils.generateString(10));
-        loginPage.placeCursorInField(loginPage.getPasswordField());
+        utils.placeCursorInField(loginPage.getPasswordField());
 
         Assertions.assertEquals(LoginPage.incorrectEmailError, loginPage.getEmailValidationError());
     }
@@ -91,9 +92,10 @@ public class LoginPageTest extends BaseTest {
         homePage.openLoginPage();
 
         LoginPage loginPage = new LoginPage();
-        loginPage.placeCursorInField(loginPage.getEmailField());
         Utils utils = new Utils();
+        utils.placeCursorInField(loginPage.getEmailField());
         loginPage.inputPassword(utils.generateString(7));
+
         Assertions.assertEquals(LoginPage.emptyFieldError, loginPage.getEmailValidationError());
     }
 
@@ -106,9 +108,10 @@ public class LoginPageTest extends BaseTest {
         homePage.openLoginPage();
 
         LoginPage loginPage = new LoginPage();
-        loginPage.placeCursorInField(loginPage.getPasswordField());
         Utils utils = new Utils();
+        utils.placeCursorInField(loginPage.getPasswordField());
         loginPage.inputEmail(utils.generateEmail(23, "@mail.com"));
+
         Assertions.assertEquals(LoginPage.emptyFieldError, loginPage.getPasswordValidationError());
     }
 }

@@ -33,11 +33,6 @@ public class LoginPage {
         return passwordField;
     }
 
-    public void placeCursorInField(By cssSelector) {
-        Utils.setWaiterByVisibility(driver, 3, 300, cssSelector);
-        driver.findElement(cssSelector).click();
-    }
-
     public void inputEmail(String email) {
         Utils.setWaiterByVisibility(driver, 3, 300, emailField);
         driver.findElement(emailField).sendKeys(email);

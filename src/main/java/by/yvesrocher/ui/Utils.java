@@ -24,6 +24,10 @@ public class Utils {
                 pollingEvery(Duration.ofMillis(pollingMillis));
         wait.until(ExpectedConditions.visibilityOfElementLocated(cssLocator));
     }
+    public void placeCursorInField(By cssSelector){
+        setWaiterByVisibility(driver, 3, 300, cssSelector);
+        driver.findElement(cssSelector).click();
+    }
 
     public void scrollingWheel(By cssSelector) {
         WebElement iframe = driver.findElement(cssSelector);
