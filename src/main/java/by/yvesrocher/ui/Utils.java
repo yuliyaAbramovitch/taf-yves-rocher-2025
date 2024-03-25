@@ -18,13 +18,15 @@ public class Utils {
     public Utils() {
         this.driver = Driver.getDriver();
     }
-    public static void setWaiterByVisibility(WebDriver driver, int timeoutSeconds, int pollingMillis, By cssLocator){
+
+    public static void setWaiterByVisibility(WebDriver driver, int timeoutSeconds, int pollingMillis, By cssLocator) {
         Wait<WebDriver> wait = new FluentWait<>(driver).
                 withTimeout(Duration.ofSeconds(timeoutSeconds)).
                 pollingEvery(Duration.ofMillis(pollingMillis));
         wait.until(ExpectedConditions.visibilityOfElementLocated(cssLocator));
     }
-    public void placeCursorInField(By cssSelector){
+
+    public void placeCursorInField(By cssSelector) {
         setWaiterByVisibility(driver, 3, 300, cssSelector);
         driver.findElement(cssSelector).click();
     }
@@ -51,16 +53,12 @@ public class Utils {
     }
 
     public String generateString(String appendix, int lengthLimit) {
-        return generateString(calculateSymbols(appendix,lengthLimit));
+        return generateString(calculateSymbols(appendix, lengthLimit));
     }
 
     public String generateEmail(int lengthLimit, String postfix) {
-        return generateString(calculateSymbols(postfix,lengthLimit)) + postfix;
+        return generateString(calculateSymbols(postfix, lengthLimit)) + postfix;
     }
-
-//    public String generateEmail(String prefix, int length, String postfix) {
-//        return prefix + RandomStringUtils.randomAlphabetic(length) + postfix;
-//    }
 
     public String generateEmail(String prefix, int lengthLimit) {
         return prefix + generateString(prefix, lengthLimit);
