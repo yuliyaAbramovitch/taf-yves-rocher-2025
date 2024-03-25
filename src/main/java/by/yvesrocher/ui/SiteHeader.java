@@ -2,6 +2,7 @@ package by.yvesrocher.ui;
 
 import by.yvesrocher.driver.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -26,8 +27,7 @@ public class SiteHeader {
     }
 
     public void searchInCatalog(String searchWord) {
-        driver.findElement(searchField).sendKeys(searchWord);
-        driver.findElement(searchMagnifier).click();
+        driver.findElement(searchField).sendKeys(searchWord, Keys.ENTER);
     }
 
     public String getCurrentLanguage() {
