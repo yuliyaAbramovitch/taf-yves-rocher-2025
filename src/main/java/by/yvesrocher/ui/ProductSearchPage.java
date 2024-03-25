@@ -11,8 +11,6 @@ public class ProductSearchPage {
         this.driver = Driver.getDriver();
     }
 
-    private By searchField = By.cssSelector(".search .eye-placeholder");
-    private By searchMagnifier = By.cssSelector("div[aria-label='search-btn']");
     private By searchResultsCounter = By.cssSelector(".heading-wrapper .number-of-products");
     private By item = By.cssSelector(".products .product-item");
     private By itemName = By.cssSelector(".product-item .card-name");
@@ -24,16 +22,19 @@ public class ProductSearchPage {
     private By basketBtn = By.cssSelector(".basket-btn");
     private By redirectToBasketBtn = By.cssSelector(".modal-basket .basket-btn");
 
-    public void searchInCatalog(String searchWord) {
-        driver.findElement(searchField).sendKeys(searchWord);
-        driver.findElement(searchMagnifier).click();
-    }
-
     public String getItemName() {
         return driver.findElement(itemName).getText();
     }
 
+    public void addItemToBasket() {
+        driver.findElement(basketBtn).click();
+    }
+
     public void goToBasket() {
         driver.findElement(redirectToBasketBtn).click();
+    }
+
+    public String getSearchItemCount() {
+        return driver.findElement(searchResultsCounter).getText();
     }
 }

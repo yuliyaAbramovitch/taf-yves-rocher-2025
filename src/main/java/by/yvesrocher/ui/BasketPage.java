@@ -22,7 +22,7 @@ public class BasketPage {
         return driver.findElements(chosenProduct);
     }
 
-    private List<String> getItemNames(List<WebElement> chosenItems) {
+    public List<String> getItemNames(List<WebElement> chosenItems) {
         List<String> itemNames = new ArrayList<>();
         for (WebElement chosenItem : chosenItems) {
             itemNames.add(chosenItem.findElement(getChosenProductName).getText());
