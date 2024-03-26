@@ -3,6 +3,10 @@ package by.yvesrocher.ui;
 import by.yvesrocher.driver.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductSearchPage {
     WebDriver driver;
@@ -22,19 +26,37 @@ public class ProductSearchPage {
     private By basketBtn = By.cssSelector(".basket-btn");
     private By redirectToBasketBtn = By.cssSelector(".modal-basket .basket-btn");
 
+    public String getSearchItemCount() {
+        return driver.findElement(searchResultsCounter).getText();
+    }
+
+    private List<WebElement> getItemList() {
+        List<WebElement> items = driver.findElements(item);
+        System.out.println(items.size());
+        return items;
+    }
+
+    public List<String> getItemNames() {
+        List<String> itemNames = new ArrayList<>();
+        for (WebElement item : getItemList()) {
+            itemNames.add(item.findElement(itemName).getText());
+        }
+        return itemNames;
+    }
+
+    private WebElement getItem() {
+        return driver.findElement(item);
+    }
+
     public String getItemName() {
-        return driver.findElement(itemName).getText();
+        return getItem().findElement(itemName).getText();
     }
 
     public void addItemToBasket() {
-        driver.findElement(basketBtn).click();
+        getItem().findElement(basketBtn).click();
     }
 
     public void goToBasket() {
         driver.findElement(redirectToBasketBtn).click();
-    }
-
-    public String getSearchItemCount() {
-        return driver.findElement(searchResultsCounter).getText();
     }
 }

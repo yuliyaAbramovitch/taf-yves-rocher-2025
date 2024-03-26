@@ -26,8 +26,10 @@ public class SiteHeader {
         driver.findElement(login).click();
     }
 
-    public void searchInCatalog(String searchWord) {
+    public void searchInCatalog(String searchWord) throws InterruptedException {
+        Thread.sleep(3000);
         driver.findElement(searchField).sendKeys(searchWord, Keys.ENTER);
+        Thread.sleep(3000);
     }
 
     public String getCurrentLanguage() {
