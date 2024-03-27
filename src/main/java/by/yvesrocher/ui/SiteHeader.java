@@ -19,7 +19,6 @@ public class SiteHeader {
     private By languageBar = By.cssSelector(".view-versions-container .langauge-buttons");
     private By currentLanguage = By.cssSelector(".langauge-buttons .langauge-button.active");
     private By searchField = By.cssSelector(".search .eye-placeholder");
-    private By searchMagnifier = By.cssSelector("div[aria-label='search-btn']");
 
     public void openLoginPage() {
         Utils.setWaiterByVisibility(driver, 5, 300, login);
@@ -27,7 +26,7 @@ public class SiteHeader {
     }
 
     public void searchInCatalog(String searchWord) throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         driver.findElement(searchField).sendKeys(searchWord, Keys.ENTER);
         Thread.sleep(3000);
     }

@@ -16,16 +16,18 @@ public class BasketPage {
     }
 
     private By chosenProduct = By.cssSelector(".chosen-products .chosen-product");
-    private By getChosenProductName = By.cssSelector(".product-info .name");
+    private By getChosenProductsNames = By.cssSelector(".product-info .name");
 
     public List<WebElement> getChosenItems() {
+//        Utils.setWaiterByVisibility(driver, 3, 500, chosenProduct);
+        Utils.setWaiterByURLToBe(driver, 3,300, "https://www.y-r.by/basket");
         return driver.findElements(chosenProduct);
     }
 
-    public List<String> getItemNames(List<WebElement> chosenItems) {
+    public List<String> getItemNames() {
         List<String> itemNames = new ArrayList<>();
-        for (WebElement chosenItem : chosenItems) {
-            itemNames.add(chosenItem.findElement(getChosenProductName).getText());
+        for (WebElement chosenItem : getChosenItems()) {
+            itemNames.add(chosenItem.findElement(getChosenProductsNames).getText());
         }
         return itemNames;
     }

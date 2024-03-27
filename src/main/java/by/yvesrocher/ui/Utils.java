@@ -25,6 +25,12 @@ public class Utils {
                 pollingEvery(Duration.ofMillis(pollingMillis));
         wait.until(ExpectedConditions.visibilityOfElementLocated(cssLocator));
     }
+    public static void setWaiterByURLToBe(WebDriver driver, int timeoutSeconds, int pollingMillis, String url) {
+        Wait<WebDriver> wait = new FluentWait<>(driver).
+                withTimeout(Duration.ofSeconds(timeoutSeconds)).
+                pollingEvery(Duration.ofMillis(pollingMillis));
+        wait.until(ExpectedConditions.urlToBe(url));
+    }
 
     public void placeCursorInField(By cssSelector) {
         setWaiterByVisibility(driver, 3, 300, cssSelector);

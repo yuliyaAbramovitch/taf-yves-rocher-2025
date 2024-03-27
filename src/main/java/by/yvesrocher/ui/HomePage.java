@@ -20,7 +20,7 @@ public class HomePage extends SiteHeader {
     }
 
     public void acceptCookie() {
-        Utils.setWaiterByVisibility(driver, 5, 300, acceptCookie);
+        Utils.setWaiterByVisibility(driver, 3, 300, acceptCookie);
         driver.findElement(acceptCookie).click();
     }
 }

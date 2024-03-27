@@ -23,6 +23,7 @@ public class ProductSearchPage {
     private By maxPrice = By.cssSelector(".prices-range .max");
     private By lowerRate = By.cssSelector(".noUi-handle-lower");
     private By upperRate = By.cssSelector(".noUi-handle-upper");
+    private By basketModal = By.cssSelector(".modal-wrapper .product");
     private By basketBtn = By.cssSelector(".basket-btn");
     private By redirectToBasketBtn = By.cssSelector(".modal-basket .basket-btn");
 
@@ -31,9 +32,9 @@ public class ProductSearchPage {
     }
 
     private List<WebElement> getItemList() {
-        List<WebElement> items = driver.findElements(item);
-        System.out.println(items.size());
-        return items;
+        Utils utils=new Utils();
+        utils.scrollingWheel(basketBtn);
+        return driver.findElements(item);
     }
 
     public List<String> getItemNames() {
@@ -45,6 +46,9 @@ public class ProductSearchPage {
     }
 
     private WebElement getItem() {
+        Utils utils=new Utils();
+        utils.scrollingWheel(basketBtn);
+        Utils.setWaiterByVisibility(driver, 4, 500, item);
         return driver.findElement(item);
     }
 
@@ -57,6 +61,7 @@ public class ProductSearchPage {
     }
 
     public void goToBasket() {
+        Utils.setWaiterByVisibility(driver, 4, 300, redirectToBasketBtn);
         driver.findElement(redirectToBasketBtn).click();
     }
 }
